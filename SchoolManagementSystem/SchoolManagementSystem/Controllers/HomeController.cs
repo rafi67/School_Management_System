@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StudentManagentSystem.Models;
+using SchoolManagementSystem.Models;
 using System.Diagnostics;
 
-namespace StudentManagentSystem.Controllers
+namespace SchoolManagementSystem.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace StudentManagentSystem.Controllers
+namespace SchoolManagementSystem.Controllers
 {
     public class StudentsController : Controller
     {
