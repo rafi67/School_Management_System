@@ -47,6 +47,7 @@ namespace SchoolManagementSystem.Models
         public virtual DbSet<TeacherDesignation> TeacherDesignations { get; set; } = null!;
         public virtual DbSet<TeacherExamRoutine> TeacherExamRoutines { get; set; } = null!;
         public virtual DbSet<TeacherPortal> TeacherPortals { get; set; } = null!;
+        public virtual DbSet<TeacherPromotion> TeacherPromotions { get; set; } = null!;
         public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -75,12 +76,16 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.Admins)
                     .HasForeignKey(d => d.Teacherid)
-                    .HasConstraintName("FK__Admin__Teacherid__1AD3FDA4");
+                    .HasConstraintName("FK__Admin__Teacherid__1DB06A4F");
             });
 
             modelBuilder.Entity<Branch>(entity =>
             {
                 entity.ToTable("Branch");
+
+                entity.Property(e => e.BranchLocation)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.BranchName)
                     .HasMaxLength(100)
@@ -242,7 +247,7 @@ namespace SchoolManagementSystem.Models
             modelBuilder.Entity<GradingSystem>(entity =>
             {
                 entity.HasKey(e => e.GradeId)
-                    .HasName("PK__GradingS__54F87A57DAD9A6A6");
+                    .HasName("PK__GradingS__54F87A577A17712F");
 
                 entity.ToTable("GradingSystem");
 
@@ -773,7 +778,27 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherPortals)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherPo__Teach__14270015");
+                    .HasConstraintName("FK__TeacherPo__Teach__17036CC0");
+            });
+
+            modelBuilder.Entity<TeacherPromotion>(entity =>
+            {
+                entity.ToTable("TeacherPromotion");
+
+                entity.Property(e => e.PromotionApprover)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PromotionDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PromotionReason)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.TeacherPromotions)
+                    .HasForeignKey(d => d.TeacherId)
+                    .HasConstraintName("FK__TeacherPr__Teach__14270015");
             });
 
             modelBuilder.Entity<TeacherSubject>(entity =>

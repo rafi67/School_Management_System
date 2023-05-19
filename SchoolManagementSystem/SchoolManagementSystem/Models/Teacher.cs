@@ -12,6 +12,7 @@ namespace SchoolManagementSystem.Models
             TeacherDesignations = new HashSet<TeacherDesignation>();
             TeacherExamRoutines = new HashSet<TeacherExamRoutine>();
             TeacherPortals = new HashSet<TeacherPortal>();
+            TeacherPromotions = new HashSet<TeacherPromotion>();
             TeacherSubjects = new HashSet<TeacherSubject>();
         }
 
@@ -35,6 +36,7 @@ namespace SchoolManagementSystem.Models
         public virtual ICollection<TeacherDesignation> TeacherDesignations { get; set; }
         public virtual ICollection<TeacherExamRoutine> TeacherExamRoutines { get; set; }
         public virtual ICollection<TeacherPortal> TeacherPortals { get; set; }
+        public virtual ICollection<TeacherPromotion> TeacherPromotions { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }
