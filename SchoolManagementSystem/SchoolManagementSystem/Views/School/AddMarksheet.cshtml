@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "AddMarksheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row mt-4 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div style="border-top-width:10px;" class="card card-default border-top-10 border-success">
+            <div class="card-header">
+                <h2 class="card-title">Enter Student Mark Sheet Details</h2>
+            </div>
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="StudentID">Student ID</label>
+                                <input type="text" class="form-control" id="student_ID">
+                            </div>
+                             <div class="col-md-6">
+                                <label for="ExamId">Exam ID</label>
+                                <input type="text" class="form-control" id="exam_Id">
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="ClassSubjectID">Class Subject ID</label>
+                                <input type="text" class="form-control" id="classSubject_Id">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-6">
+                                <label for="TotalMarks">Total Marks</label>
+                                <input type="number" class="form-control" id="total_Marks">
+                            </div>
+                             <div class="col-md-6">
+                                <label for="ObtainMarks">Obtain Marks</label>
+                                <input type="number" class="form-control" id="obtain_Marks">
+                            </div>
+                            
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group ml-3 mt-3">
+                                <button class="btn btn-success">Save</button>
+                                <a href="ExamMarksheet" class="ml-3 btn btn-outline-info">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

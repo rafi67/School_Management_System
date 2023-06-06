@@ -20,6 +20,8 @@ namespace SchoolManagementSystem.Models
         public virtual DbSet<Branch> Branches { get; set; } = null!;
         public virtual DbSet<Building> Buildings { get; set; } = null!;
         public virtual DbSet<Campus> Campuses { get; set; } = null!;
+        public virtual DbSet<CampusCurriculum> CampusCurricula { get; set; } = null!;
+        public virtual DbSet<CampusShift> CampusShifts { get; set; } = null!;
         public virtual DbSet<Class> Classes { get; set; } = null!;
         public virtual DbSet<ClassRoutine> ClassRoutines { get; set; } = null!;
         public virtual DbSet<Curriculum> Curricula { get; set; } = null!;
@@ -32,6 +34,7 @@ namespace SchoolManagementSystem.Models
         public virtual DbSet<Session> Sessions { get; set; } = null!;
         public virtual DbSet<Shift> Shifts { get; set; } = null!;
         public virtual DbSet<Student> Students { get; set; } = null!;
+        public virtual DbSet<StudentAttendance> StudentAttendances { get; set; } = null!;
         public virtual DbSet<StudentClassRoutine> StudentClassRoutines { get; set; } = null!;
         public virtual DbSet<StudentExamRoutine> StudentExamRoutines { get; set; } = null!;
         public virtual DbSet<StudentPayment> StudentPayments { get; set; } = null!;
@@ -43,6 +46,7 @@ namespace SchoolManagementSystem.Models
         public virtual DbSet<Subject> Subjects { get; set; } = null!;
         public virtual DbSet<SuperAdmin> SuperAdmins { get; set; } = null!;
         public virtual DbSet<Teacher> Teachers { get; set; } = null!;
+        public virtual DbSet<TeacherAttendance> TeacherAttendances { get; set; } = null!;
         public virtual DbSet<TeacherClassRoutine> TeacherClassRoutines { get; set; } = null!;
         public virtual DbSet<TeacherDesignation> TeacherDesignations { get; set; } = null!;
         public virtual DbSet<TeacherExamRoutine> TeacherExamRoutines { get; set; } = null!;
@@ -55,7 +59,7 @@ namespace SchoolManagementSystem.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=AISHI-TONMOY-BS;Database=SchoolDb;Trusted_Connection=true;");
+                optionsBuilder.UseSqlServer("Server=AISHI-TONMOY-BS;Database=SchoolDb;Trusted_Connection=True;");
             }
         }
 
@@ -76,7 +80,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.Admins)
                     .HasForeignKey(d => d.Teacherid)
-                    .HasConstraintName("FK__Admin__Teacherid__1DB06A4F");
+                    .HasConstraintName("FK__Admin__Teacherid__236943A5");
             });
 
             modelBuilder.Entity<Branch>(entity =>
@@ -103,12 +107,14 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Campus)
                     .WithMany(p => p.Buildings)
                     .HasForeignKey(d => d.CampusId)
-                    .HasConstraintName("FK__Building__Campus__46E78A0C");
+                    .HasConstraintName("FK__Building__Campus__49C3F6B7");
             });
 
             modelBuilder.Entity<Campus>(entity =>
             {
                 entity.ToTable("Campus");
+
+                entity.Property(e => e.CampusId).ValueGeneratedNever();
 
                 entity.Property(e => e.CampusName)
                     .HasMaxLength(100)
@@ -122,11 +128,36 @@ namespace SchoolManagementSystem.Models
                     .WithMany(p => p.Campuses)
                     .HasForeignKey(d => d.BranchId)
                     .HasConstraintName("FK__Campus__BranchId__4316F928");
+            });
+
+            modelBuilder.Entity<CampusCurriculum>(entity =>
+            {
+                entity.ToTable("CampusCurriculum");
+
+                entity.HasOne(d => d.Campus)
+                    .WithMany(p => p.CampusCurricula)
+                    .HasForeignKey(d => d.CampusId)
+                    .HasConstraintName("FK__CampusCur__Campu__52593CB8");
+
+                entity.HasOne(d => d.Curriculum)
+                    .WithMany(p => p.CampusCurricula)
+                    .HasForeignKey(d => d.CurriculumId)
+                    .HasConstraintName("FK__CampusCur__Curri__5165187F");
+            });
+
+            modelBuilder.Entity<CampusShift>(entity =>
+            {
+                entity.ToTable("CampusShift");
+
+                entity.HasOne(d => d.Campus)
+                    .WithMany(p => p.CampusShifts)
+                    .HasForeignKey(d => d.CampusId)
+                    .HasConstraintName("FK__CampusShi__Campu__46E78A0C");
 
                 entity.HasOne(d => d.Shift)
-                    .WithMany(p => p.Campuses)
+                    .WithMany(p => p.CampusShifts)
                     .HasForeignKey(d => d.ShiftId)
-                    .HasConstraintName("FK__Campus__ShiftId__440B1D61");
+                    .HasConstraintName("FK__CampusShi__Shift__45F365D3");
             });
 
             modelBuilder.Entity<Class>(entity =>
@@ -140,7 +171,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Curriculum)
                     .WithMany(p => p.Classes)
                     .HasForeignKey(d => d.CurriculumId)
-                    .HasConstraintName("FK__Class__Curriculu__4F7CD00D");
+                    .HasConstraintName("FK__Class__Curriculu__5535A963");
             });
 
             modelBuilder.Entity<ClassRoutine>(entity =>
@@ -166,27 +197,27 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.ClassRoutines)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__ClassRout__Class__5535A963");
+                    .HasConstraintName("FK__ClassRout__Class__5AEE82B9");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.ClassRoutines)
                     .HasForeignKey(d => d.RoomId)
-                    .HasConstraintName("FK__ClassRout__RoomI__571DF1D5");
+                    .HasConstraintName("FK__ClassRout__RoomI__5CD6CB2B");
 
                 entity.HasOne(d => d.Section)
                     .WithMany(p => p.ClassRoutines)
                     .HasForeignKey(d => d.SectionId)
-                    .HasConstraintName("FK__ClassRout__Secti__59063A47");
+                    .HasConstraintName("FK__ClassRout__Secti__5EBF139D");
 
                 entity.HasOne(d => d.Shift)
                     .WithMany(p => p.ClassRoutines)
                     .HasForeignKey(d => d.Shiftid)
-                    .HasConstraintName("FK__ClassRout__Shift__5812160E");
+                    .HasConstraintName("FK__ClassRout__Shift__5DCAEF64");
 
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.ClassRoutines)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__ClassRout__Subje__5629CD9C");
+                    .HasConstraintName("FK__ClassRout__Subje__5BE2A6F2");
             });
 
             modelBuilder.Entity<Curriculum>(entity =>
@@ -196,11 +227,6 @@ namespace SchoolManagementSystem.Models
                 entity.Property(e => e.CurriculumName)
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.Campus)
-                    .WithMany(p => p.Curricula)
-                    .HasForeignKey(d => d.CampusId)
-                    .HasConstraintName("FK__Curriculu__Campu__4CA06362");
             });
 
             modelBuilder.Entity<Designation>(entity =>
@@ -241,13 +267,13 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.Exams)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__Exam__SubjectId__5BE2A6F2");
+                    .HasConstraintName("FK__Exam__SubjectId__619B8048");
             });
 
             modelBuilder.Entity<GradingSystem>(entity =>
             {
                 entity.HasKey(e => e.GradeId)
-                    .HasName("PK__GradingS__54F87A577A17712F");
+                    .HasName("PK__GradingS__54F87A57B28C52A6");
 
                 entity.ToTable("GradingSystem");
 
@@ -258,7 +284,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.GradingSystems)
                     .HasForeignKey(d => d.Classid)
-                    .HasConstraintName("FK__GradingSy__Class__5EBF139D");
+                    .HasConstraintName("FK__GradingSy__Class__6477ECF3");
             });
 
             modelBuilder.Entity<Group>(entity =>
@@ -277,7 +303,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Building)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.BuildingId)
-                    .HasConstraintName("FK__Room__BuildingId__49C3F6B7");
+                    .HasConstraintName("FK__Room__BuildingId__4CA06362");
             });
 
             modelBuilder.Entity<Section>(entity =>
@@ -331,6 +357,14 @@ namespace SchoolManagementSystem.Models
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
 
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FatherBloodGroup)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FatherEmail)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -352,6 +386,10 @@ namespace SchoolManagementSystem.Models
                     .HasMaxLength(14)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FatherPhoto)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FirstName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -364,8 +402,40 @@ namespace SchoolManagementSystem.Models
                     .HasColumnType("decimal(18, 0)")
                     .HasColumnName("GPA");
 
+                entity.Property(e => e.GuardianAddress)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianEmail)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianOccupation)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianPhone)
+                    .HasMaxLength(14)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianPhoto)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GuardianRelation)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.LastName)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MotherBloodGroup)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MotherEmail)
@@ -389,6 +459,10 @@ namespace SchoolManagementSystem.Models
                     .HasMaxLength(14)
                     .IsUnicode(false);
 
+                entity.Property(e => e.MotherPhoto)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nationality)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -397,8 +471,8 @@ namespace SchoolManagementSystem.Models
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Photo)
-                    .HasMaxLength(1000)
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(14)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PresentAddress)
@@ -417,35 +491,65 @@ namespace SchoolManagementSystem.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.StudentBloodGroup)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StudentPhoto)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.Campus)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.CampusId)
-                    .HasConstraintName("FK__Student__CampusI__619B8048");
+                    .HasConstraintName("FK__Student__CampusI__6754599E");
 
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__Student__ClassId__66603565");
+                    .HasConstraintName("FK__Student__ClassId__6C190EBB");
+
+                entity.HasOne(d => d.Curriculum)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.CurriculumId)
+                    .HasConstraintName("FK__Student__Curricu__3587F3E0");
 
                 entity.HasOne(d => d.Group)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.GroupId)
-                    .HasConstraintName("FK__Student__GroupId__6383C8BA");
+                    .HasConstraintName("FK__Student__GroupId__693CA210");
 
                 entity.HasOne(d => d.Section)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.SectionId)
-                    .HasConstraintName("FK__Student__Section__628FA481");
+                    .HasConstraintName("FK__Student__Section__68487DD7");
 
                 entity.HasOne(d => d.Session)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.SessionId)
-                    .HasConstraintName("FK__Student__Session__6477ECF3");
+                    .HasConstraintName("FK__Student__Session__6A30C649");
 
                 entity.HasOne(d => d.Shift)
                     .WithMany(p => p.Students)
                     .HasForeignKey(d => d.ShiftId)
-                    .HasConstraintName("FK__Student__ShiftId__656C112C");
+                    .HasConstraintName("FK__Student__ShiftId__6B24EA82");
+            });
+
+            modelBuilder.Entity<StudentAttendance>(entity =>
+            {
+                entity.HasKey(e => e.StudentAttendance1)
+                    .HasName("PK__StudentA__EBD7974FC08F7F1D");
+
+                entity.ToTable("StudentAttendance");
+
+                entity.Property(e => e.StudentAttendance1).HasColumnName("StudentAttendance");
+
+                entity.Property(e => e.AttendanceDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.StudentAttendances)
+                    .HasForeignKey(d => d.StudentId)
+                    .HasConstraintName("FK__StudentAt__Stude__30C33EC3");
             });
 
             modelBuilder.Entity<StudentClassRoutine>(entity =>
@@ -455,12 +559,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.ClassRoutine)
                     .WithMany(p => p.StudentClassRoutines)
                     .HasForeignKey(d => d.ClassRoutineId)
-                    .HasConstraintName("FK__StudentCl__Class__693CA210");
+                    .HasConstraintName("FK__StudentCl__Class__6EF57B66");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentClassRoutines)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentCl__Stude__6A30C649");
+                    .HasConstraintName("FK__StudentCl__Stude__6FE99F9F");
             });
 
             modelBuilder.Entity<StudentExamRoutine>(entity =>
@@ -470,12 +574,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Exam)
                     .WithMany(p => p.StudentExamRoutines)
                     .HasForeignKey(d => d.ExamId)
-                    .HasConstraintName("FK__StudentEx__ExamI__73BA3083");
+                    .HasConstraintName("FK__StudentEx__ExamI__797309D9");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentExamRoutines)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentEx__Stude__74AE54BC");
+                    .HasConstraintName("FK__StudentEx__Stude__7A672E12");
             });
 
             modelBuilder.Entity<StudentPayment>(entity =>
@@ -501,7 +605,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentPayments)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentPa__Stude__6D0D32F4");
+                    .HasConstraintName("FK__StudentPa__Stude__72C60C4A");
             });
 
             modelBuilder.Entity<StudentPortal>(entity =>
@@ -519,7 +623,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentPortals)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentPo__Stude__00200768");
+                    .HasConstraintName("FK__StudentPo__Stude__05D8E0BE");
             });
 
             modelBuilder.Entity<StudentPromotion>(entity =>
@@ -539,12 +643,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.StudentPromotions)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__StudentPr__Class__787EE5A0");
+                    .HasConstraintName("FK__StudentPr__Class__7E37BEF6");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentPromotions)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentPr__Stude__778AC167");
+                    .HasConstraintName("FK__StudentPr__Stude__7D439ABD");
             });
 
             modelBuilder.Entity<StudentResult>(entity =>
@@ -556,17 +660,17 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Grade)
                     .WithMany(p => p.StudentResults)
                     .HasForeignKey(d => d.GradeId)
-                    .HasConstraintName("FK__StudentRe__Grade__7D439ABD");
+                    .HasConstraintName("FK__StudentRe__Grade__02FC7413");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentResults)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentRe__Stude__7B5B524B");
+                    .HasConstraintName("FK__StudentRe__Stude__01142BA1");
 
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.StudentResults)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__StudentRe__Subje__7C4F7684");
+                    .HasConstraintName("FK__StudentRe__Subje__02084FDA");
             });
 
             modelBuilder.Entity<StudentSubject>(entity =>
@@ -576,12 +680,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentSubjects)
                     .HasForeignKey(d => d.StudentId)
-                    .HasConstraintName("FK__StudentSu__Stude__70DDC3D8");
+                    .HasConstraintName("FK__StudentSu__Stude__76969D2E");
 
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.StudentSubjects)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__StudentSu__Subje__6FE99F9F");
+                    .HasConstraintName("FK__StudentSu__Subje__75A278F5");
             });
 
             modelBuilder.Entity<Stuff>(entity =>
@@ -634,7 +738,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.Subjects)
                     .HasForeignKey(d => d.ClassId)
-                    .HasConstraintName("FK__Subject__ClassId__52593CB8");
+                    .HasConstraintName("FK__Subject__ClassId__5812160E");
             });
 
             modelBuilder.Entity<SuperAdmin>(entity =>
@@ -718,6 +822,23 @@ namespace SchoolManagementSystem.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<TeacherAttendance>(entity =>
+            {
+                entity.HasKey(e => e.TeacherAttendance1)
+                    .HasName("PK__TeacherA__710BA743F2597FB8");
+
+                entity.ToTable("TeacherAttendance");
+
+                entity.Property(e => e.TeacherAttendance1).HasColumnName("TeacherAttendance");
+
+                entity.Property(e => e.AttendanceDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.TeacherAttendances)
+                    .HasForeignKey(d => d.TeacherId)
+                    .HasConstraintName("FK__TeacherAt__Teach__339FAB6E");
+            });
+
             modelBuilder.Entity<TeacherClassRoutine>(entity =>
             {
                 entity.ToTable("TeacherClassRoutine");
@@ -725,12 +846,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.ClassRoutine)
                     .WithMany(p => p.TeacherClassRoutines)
                     .HasForeignKey(d => d.ClassRoutineId)
-                    .HasConstraintName("FK__TeacherCl__Class__08B54D69");
+                    .HasConstraintName("FK__TeacherCl__Class__0E6E26BF");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherClassRoutines)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherCl__Teach__09A971A2");
+                    .HasConstraintName("FK__TeacherCl__Teach__0F624AF8");
             });
 
             modelBuilder.Entity<TeacherDesignation>(entity =>
@@ -740,12 +861,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Designation)
                     .WithMany(p => p.TeacherDesignations)
                     .HasForeignKey(d => d.DesignationId)
-                    .HasConstraintName("FK__TeacherDe__Desig__10566F31");
+                    .HasConstraintName("FK__TeacherDe__Desig__160F4887");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherDesignations)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherDe__Teach__114A936A");
+                    .HasConstraintName("FK__TeacherDe__Teach__17036CC0");
             });
 
             modelBuilder.Entity<TeacherExamRoutine>(entity =>
@@ -755,12 +876,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Exam)
                     .WithMany(p => p.TeacherExamRoutines)
                     .HasForeignKey(d => d.ExamId)
-                    .HasConstraintName("FK__TeacherEx__ExamI__0C85DE4D");
+                    .HasConstraintName("FK__TeacherEx__ExamI__123EB7A3");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherExamRoutines)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherEx__Teach__0D7A0286");
+                    .HasConstraintName("FK__TeacherEx__Teach__1332DBDC");
             });
 
             modelBuilder.Entity<TeacherPortal>(entity =>
@@ -778,7 +899,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherPortals)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherPo__Teach__17036CC0");
+                    .HasConstraintName("FK__TeacherPo__Teach__1CBC4616");
             });
 
             modelBuilder.Entity<TeacherPromotion>(entity =>
@@ -798,7 +919,7 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherPromotions)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherPr__Teach__14270015");
+                    .HasConstraintName("FK__TeacherPr__Teach__19DFD96B");
             });
 
             modelBuilder.Entity<TeacherSubject>(entity =>
@@ -808,12 +929,12 @@ namespace SchoolManagementSystem.Models
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.TeacherSubjects)
                     .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("FK__TeacherSu__Subje__04E4BC85");
+                    .HasConstraintName("FK__TeacherSu__Subje__0A9D95DB");
 
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.TeacherSubjects)
                     .HasForeignKey(d => d.TeacherId)
-                    .HasConstraintName("FK__TeacherSu__Teach__05D8E0BE");
+                    .HasConstraintName("FK__TeacherSu__Teach__0B91BA14");
             });
 
             OnModelCreatingPartial(modelBuilder);

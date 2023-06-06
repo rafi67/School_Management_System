@@ -11,7 +11,7 @@ namespace SchoolManagementSystem.Models
         }
 
         public long BuildingId { get; set; }
-        public long? CampusId { get; set; }
+        public Guid? CampusId { get; set; }
         public string? BuildingName { get; set; }
 
         public virtual Campus? Campus { get; set; }

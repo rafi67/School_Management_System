@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "TeacherExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-4 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div class="card card-gray">
+            <div class="card-header">
+                <h2 class="card-title">Set Teacher Exam</h2>
+            </div>
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="SubjectName">Subject Name</label>
+                                <input type="text" class="form-control" id="subjectName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Room No">Room No</label>
+                                <input type="number" class="form-control" id="room_no">
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" datamask="inputmode=" numeric">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="duration">Duration</label>
+                                <input type="text" class="form-control" id="duration">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="StartTime">Start Time</label>
+                                <input type="time" class="form-control" id="start_Time">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="EndTime">End Time</label>
+                                <input type="time" class="form-control" id="end_time">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group ml-3 mt-3">
+                                <button class="btn btn-success">Save</button>
+                                <a href="TeacherExamRoutine" class="ml-3 btn btn-outline-info">Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

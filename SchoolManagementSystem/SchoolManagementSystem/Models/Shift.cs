@@ -7,7 +7,7 @@ namespace SchoolManagementSystem.Models
     {
         public Shift()
         {
-            Campuses = new HashSet<Campus>();
+            CampusShifts = new HashSet<CampusShift>();
             ClassRoutines = new HashSet<ClassRoutine>();
             Students = new HashSet<Student>();
         }
@@ -18,7 +18,7 @@ namespace SchoolManagementSystem.Models
         public string? StartTime { get; set; }
         public string? EndTime { get; set; }
 
-        public virtual ICollection<Campus> Campuses { get; set; }
+        public virtual ICollection<CampusShift> CampusShifts { get; set; }
         public virtual ICollection<ClassRoutine> ClassRoutines { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }

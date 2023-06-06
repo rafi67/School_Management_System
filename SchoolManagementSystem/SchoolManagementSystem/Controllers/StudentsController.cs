@@ -8,5 +8,6 @@ namespace SchoolManagementSystem.Controllers
         {
             return View();
         }
+
     }
 }

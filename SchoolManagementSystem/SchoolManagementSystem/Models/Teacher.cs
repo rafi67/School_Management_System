@@ -8,6 +8,7 @@ namespace SchoolManagementSystem.Models
         public Teacher()
         {
             Admins = new HashSet<Admin>();
+            TeacherAttendances = new HashSet<TeacherAttendance>();
             TeacherClassRoutines = new HashSet<TeacherClassRoutine>();
             TeacherDesignations = new HashSet<TeacherDesignation>();
             TeacherExamRoutines = new HashSet<TeacherExamRoutine>();
@@ -32,6 +33,7 @@ namespace SchoolManagementSystem.Models
         public string? Salary { get; set; }
 
         public virtual ICollection<Admin> Admins { get; set; }
+        public virtual ICollection<TeacherAttendance> TeacherAttendances { get; set; }
         public virtual ICollection<TeacherClassRoutine> TeacherClassRoutines { get; set; }
         public virtual ICollection<TeacherDesignation> TeacherDesignations { get; set; }
         public virtual ICollection<TeacherExamRoutine> TeacherExamRoutines { get; set; }

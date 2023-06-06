@@ -8,20 +8,20 @@ namespace SchoolManagementSystem.Models
         public Campus()
         {
             Buildings = new HashSet<Building>();
-            Curricula = new HashSet<Curriculum>();
+            CampusCurricula = new HashSet<CampusCurriculum>();
+            CampusShifts = new HashSet<CampusShift>();
             Students = new HashSet<Student>();
         }
 
-        public long CampusId { get; set; }
+        public Guid CampusId { get; set; }
         public long? BranchId { get; set; }
-        public long? ShiftId { get; set; }
         public string? CampusName { get; set; }
         public string? Location { get; set; }
 
         public virtual Branch? Branch { get; set; }
-        public virtual Shift? Shift { get; set; }
         public virtual ICollection<Building> Buildings { get; set; }
-        public virtual ICollection<Curriculum> Curricula { get; set; }
+        public virtual ICollection<CampusCurriculum> CampusCurricula { get; set; }
+        public virtual ICollection<CampusShift> CampusShifts { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }
