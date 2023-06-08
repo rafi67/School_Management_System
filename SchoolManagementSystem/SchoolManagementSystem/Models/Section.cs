@@ -8,6 +8,7 @@ namespace SchoolManagementSystem.Models
         public Section()
         {
             ClassRoutines = new HashSet<ClassRoutine>();
+            StudentPromotions = new HashSet<StudentPromotion>();
             Students = new HashSet<Student>();
         }
 
@@ -15,6 +16,7 @@ namespace SchoolManagementSystem.Models
         public string? SectionName { get; set; }
 
         public virtual ICollection<ClassRoutine> ClassRoutines { get; set; }
+        public virtual ICollection<StudentPromotion> StudentPromotions { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }

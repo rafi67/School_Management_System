@@ -59,7 +59,7 @@ namespace SchoolManagementSystem.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=AISHI-TONMOY-BS;Database=SchoolDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.;Database=SchoolDb;Trusted_Connection=True;");
             }
         }
 
@@ -630,20 +630,27 @@ namespace SchoolManagementSystem.Models
             {
                 entity.ToTable("StudentPromotion");
 
-                entity.Property(e => e.PromotionApprover)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.PromotionDate).HasColumnType("datetime");
-
-                entity.Property(e => e.PromotionReason)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.StudentPromotions)
                     .HasForeignKey(d => d.ClassId)
                     .HasConstraintName("FK__StudentPr__Class__7E37BEF6");
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.StudentPromotions)
+                    .HasForeignKey(d => d.GroupId)
+                    .HasConstraintName("FK__StudentPr__Group__395884C4");
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.StudentPromotions)
+                    .HasForeignKey(d => d.SectionId)
+                    .HasConstraintName("FK__StudentPr__Secti__367C1819");
+
+                entity.HasOne(d => d.Session)
+                    .WithMany(p => p.StudentPromotions)
+                    .HasForeignKey(d => d.SessionId)
+                    .HasConstraintName("FK__StudentPr__Sessi__3864608B");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentPromotions)

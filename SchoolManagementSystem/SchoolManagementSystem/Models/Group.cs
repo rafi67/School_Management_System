@@ -7,12 +7,14 @@ namespace SchoolManagementSystem.Models
     {
         public Group()
         {
+            StudentPromotions = new HashSet<StudentPromotion>();
             Students = new HashSet<Student>();
         }
 
         public long GroupId { get; set; }
         public string? GroupName { get; set; }
 
+        public virtual ICollection<StudentPromotion> StudentPromotions { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }

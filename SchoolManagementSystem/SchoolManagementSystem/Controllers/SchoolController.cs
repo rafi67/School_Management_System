@@ -4,6 +4,8 @@ using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewCategory;
 using SchoolManagementSystem.ViewModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Text.Json;
 
 namespace SchoolManagementSystem.Controllers
 {
@@ -125,14 +127,20 @@ namespace SchoolManagementSystem.Controllers
         {
             var s = db.Students.ToList();
             List<string> c = new List<string>();
-            foreach(var list in s)
+            foreach (var list in s)
             {
                 var Class = db.Classes.Find(list.ClassId);
-                Console.WriteLine(Class);
                 c.Add(Class.ClassName);
             }
             ViewData["Class"] = c;
             return View(s);
+        }
+
+        [HttpGet]
+        public IActionResult LoadStudentList()
+        {
+            var s = db.Students.ToList();
+            return Json(s);
         }
 
         //[Bind("CampusId, SectionId, GroupId, SessionId, ShiftId, ClassId, FirstName, LastName, Photo, Gender, RollNumber, DateOfBirth, BirthCertificate, AdmissionDate, Religion, Nationality, PreviousSchool, Gpa, FatherName, MotherName, FatherNid, MotherNid, FatherOccupation, MotherOccupation, FatherPhoneNumber, FatherEmail, MotherPhoneNumber, MotherEmail, PresentAddress, PermanentAddress")]
@@ -203,8 +211,27 @@ namespace SchoolManagementSystem.Controllers
         [HttpGet]
         public IActionResult StudentPromote()
         {
+            ViewData["Group"] = db.Groups.ToList();
+            ViewData["Session"] = db.Sessions.ToList();
+            ViewData["Section"] = db.Sections.ToList();
+            ViewData["Class"] = db.Classes.ToList();
+            ViewData["Student"] = db.Students.ToList();
             return View();
-        }       
+        }
+
+        [HttpPost]
+        public IActionResult StudentPromote(StudentPromotion sp)
+        {
+            var student = db.Students.Find(sp.StudentId);
+            student.ClassId = sp.ClassId;
+            student.Section = sp.Section;
+            student.SessionId = sp.SessionId;
+            student.GroupId = sp.GroupId;
+            db.Entry(student).State = EntityState.Modified;
+            db.Entry(sp).State = EntityState.Added;
+            db.SaveChanges();
+            return RedirectToAction("StudentPromote");
+        }
 
         [HttpGet]
         public IActionResult PromoteList()

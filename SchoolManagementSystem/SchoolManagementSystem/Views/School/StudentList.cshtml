@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="input-group input-group-lg">
-                                <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Select Criteria">
+                                <input id="dataTable" type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="">
                                 <div class="input-group-append">
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                        <table id="dataTable" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                                             <thead>
                                                 <tr>
                                                     <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Student ID : activate to sort column descending">Student ID</th>
@@ -111,7 +111,7 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Action : activate to sort column ascending">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="StudentList">
                                                 @foreach(var (list1, list2) in Model.Zip(Class, (a, b) => (a, b)))
                                                 {
                                                     <tr class="odd">
@@ -128,7 +128,7 @@
                                                 }
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> 
                                 </div>
 
                                 <div class="row">
@@ -174,3 +174,8 @@
         </div>       
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+<script src="~/javascriptAjax/ajax.js">    
+</script>

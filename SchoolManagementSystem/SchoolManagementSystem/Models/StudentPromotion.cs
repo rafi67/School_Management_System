@@ -10,10 +10,14 @@ namespace SchoolManagementSystem.Models
         public long? ClassId { get; set; }
         public DateTime? PromotionDate { get; set; }
         public bool? PromotionStatus { get; set; }
-        public string? PromotionReason { get; set; }
-        public string? PromotionApprover { get; set; }
+        public long? SectionId { get; set; }
+        public long? SessionId { get; set; }
+        public long? GroupId { get; set; }
 
         public virtual Class? Class { get; set; }
+        public virtual Group? Group { get; set; }
+        public virtual Section? Section { get; set; }
+        public virtual Session? Session { get; set; }
         public virtual Student? Student { get; set; }
     }
 }
