@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "StudentPromote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Student = ViewData["Student"] as List<SchoolManagementSystem.Models.Student>;
+    var Section = ViewData["Section"] as List<SchoolManagementSystem.Models.Section>;
+    var Session = ViewData["Session"] as List<SchoolManagementSystem.Models.Session>;
+    var Group = ViewData["Group"] as List<SchoolManagementSystem.Models.Group>;
+    var Class = ViewData["Class"] as List<SchoolManagementSystem.Models.Class>;
+    var Shift = ViewData["Shift"] as List<SchoolManagementSystem.Models.Shift>;
+}
+
+
+<div class="row mt-4 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div class="card card-gray">
+            <div class="card-header">
+                <h2 class="card-title">Student Promotion</h2>
+            </div>
+            <form asp-action="StudentPromote" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        @*<div class="row">
+                            <div class="col-md-4">
+                                <input type="number" class="form-control" id="studentId" placeholder="Enter Student Id">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-info">Find</button>
+                            </div>
+                        </div>*@
+                       @* <hr />*@
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Select Student</label>
+                                    <select name="StudentId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="" data-select2-id="3">Select</option>
+                                        @foreach(var list in Student)
+                                        {
+                                            <option value="@list.StudentId">@list.FirstName @list.LastName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Select Promotion Class</label>
+                                    <select name="ClassId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Class)
+                                        {
+                                            <option value="@list.ClassId">@list.ClassName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Select Group</label>
+                                    <select name="GroupId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Group)
+                                        {
+                                            <option value="@list.GroupId">@list.GroupName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Select Section</label>
+                                    <select name="SectionId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Section)
+                                        {
+                                            <option value="@list.SectionId">@list.SectionName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Select Student Session</label>
+                                    <select name="SessionId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Session)
+                                        {
+                                            <option value="@list.SessionId">@list.SessionName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Select Student Shift</label>
+                                    <select name="ShiftId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach (var list in Shift)
+                                        {
+                                            <option value="@list.ShiftId">@list.ShiftName-@list.ShiftType</option>
+                                        }
+                                    </select>
+                                </div>
+                                
+                                @*<div class="col-md-4">
+                                    <label for="PromotionFee">Promotion Fee</label>
+                                    <input type="number" class="form-control" id="promotion_Fee">
+                                </div>*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Promote Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input name="PromotionDate" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Promotion Status</label>
+                                    <select name="PromotionStatus" class="form-control select2 select2-hidden-accessible col-md-3" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option>Not Set</option>
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
+                                    </select>
+                                </div>
+                                @*<div class="col-md-4">
+                                    <label>Promotion Fee Status</label>
+                                    <select class="form-control select2 select2-hidden-accessible col-md-3" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option>Not Set</option>
+                                        <option>True</option>
+                                        <option>False</option>
+                                    </select>
+                                </div>*@
+                            </div>
+                        </div>
+
+                        <div class="form-group ml-3">
+                            <button type="submit" class="btn btn-success">Save Record</button>
+                            <a href="PromoteList" class="ml-2 btn btn-outline-warning">Back To List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

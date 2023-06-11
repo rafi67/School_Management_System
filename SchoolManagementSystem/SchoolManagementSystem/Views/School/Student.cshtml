@@ -1,0 +1,420 @@
+﻿
+@{
+    ViewData["Title"] = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Campus = ViewData["Campus"] as List<SchoolManagementSystem.Models.Campus>;
+    var Class = ViewData["Class"] as List<SchoolManagementSystem.Models.Class>;
+    var Shift = ViewData["Shift"] as List<SchoolManagementSystem.Models.Shift>;
+    var Group = ViewData["Group"] as List<SchoolManagementSystem.Models.Group>;
+    var Session = ViewData["Session"] as List<SchoolManagementSystem.Models.Session>;
+    var Section = ViewData["Section"] as List<SchoolManagementSystem.Models.Section>;
+    var Curriculum = ViewData["Curriculum"] as List<SchoolManagementSystem.Models.Curriculum>;
+}
+
+<form asp-action="StudentAdmission" method="post" enctype="multipart/form-data">
+<div class="row mt-3 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div class="card card-gray">
+            <div class="card-header">
+                <h2 class="card-title">Student Admission</h2>
+            </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Roll Number</label>
+                                <input name="RollNumber" type="number" class="form-control" id="rollNumber">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Campus</label>
+                                <select name="CampusId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" data-select2-id="3">Select Campus</option>
+                                    @foreach(var list in Campus)
+                                    {
+                                        <option value="@list.CampusId">@list.CampusName</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Curriculum</label>
+                                <select name="CurriculumId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" data-select2-id="3">Select Curriculum</option>
+                                    @foreach (var list in Curriculum)
+                                    {
+                                        <option value="@list.CurriculumId">@list.CurriculumName</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Class</label>
+                                <select name="ClassId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" data-select2-id="3">Select Class</option>
+                                    @foreach(var list in Class)
+                                    {
+                                        <option value="@list.ClassId">@list.ClassName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>First Name</label>
+                                    <input name="FirstName" type="text" class="form-control" id="first_Name">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Last Name</label>
+                                    <input name="LastName" type="text" class="form-control" id="last_Name">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Gender</label>
+                                    <select name="Gender" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Class</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Shift</label>
+                                    <select name="ShiftId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Shift</option>
+                                        @foreach(var list in Shift)
+                                        {
+                                            <option value="@list.ShiftId">@list.ShiftName-@list.ShiftType</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Session</label>
+                                    <select name="SessionId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Session</option>
+                                        @foreach(var list in Session)
+                                        {
+                                            <option value="@list.SessionId">@list.SessionName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Religion</label>
+                                    <select name="Religion" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Religion</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Christian">Christian</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Section</label>
+                                    <select name="SectionId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Section)
+                                        {
+                                            <option value="@list.SectionId">@list.SectionName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>Group</label>
+                                    <select name="GroupId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach(var list in Group)
+                                        {
+                                            <option value="@list.GroupId">@list.GroupName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="email">Email address</label>
+                                    <input type="email" name="Email" class="form-control" id="email_Address">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="MobileNumber">Mobile Number</label>
+                                    <input type="text" name="PhoneNumber" class="form-control" id="mobile_Number">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Present address</label>
+                                    <input name="PresentAddress" type="text" class="form-control" id="present_Address">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ParmanentAddress">Parmanent address</label>
+                                    <input name="PermanentAddress" type="text" class="form-control" id="parmanent_Address">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Admission Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input name="AdmissionDate" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="StudentPhoto">Student Photo</label>
+                                    <input type="file" name="Photo" class="form-control"  />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Date Of Birth</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input name="DateOfBirth" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Nationality</label>
+                                    <input name="Nationality" type="text" class="form-control" id="Nationality" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Previous School</label>
+                                    <input name="PreviousSchool" type="text" class="form-control" id="previous_School" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>GPA</label>
+                                    <input name="Gpa" type="text" class="form-control" id="gpa" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Blood Group</label>
+                                    <select name="StudentBloodGroup" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Birth Certificate</label>
+                                    <input name="BirthCertificate" type="text" class="form-control" id="birth_Certificate">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-3 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div class="card card-gray">
+            <div class="card-header">
+                <h2 class="card-title">Parent Guardian Detail</h2>
+            </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Father Name</label>
+                                <input name="FatherName" type="text" class="form-control" id="fatherName">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Father Phone</label>
+                                <input name="FatherPhoneNumber" type="text" class="form-control" id="fatherPhone">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="FatherEmail">Father Email</label>
+                                <input name="FatherEmail" type="email" class="form-control" id="fatherEmail">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="FatherNid">Father Nid</label>
+                                <input name="FatherNid" type="text" class="form-control" id="Father_Nid" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Father Blood Group</label>
+                                    <select name="FatherBloodGroup" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Blood Group</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Father Occupation</label>
+                                    <select name="FatherOccupation" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Occupation</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Driver">Driver</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="FatherPhoto">Father Photo</label>
+                                    <input type="file" name="FatherPhoto" class="form-control" id="Father_Photo" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="MotherName">Mother Name</label>
+                                    <input name="MotherName" type="text" class="form-control" id="motherName">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="MotherPhone">Mother Phone</label>
+                                    <input name="MotherPhoneNumber" type="text" class="form-control" id="motherPhone">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="MotherEmail">Mother Email</label>
+                                    <input name="MotherEmail" type="email" class="form-control" id="motherEmail">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="MotherNid">Mother Nid</label>
+                                    <input name="MotherNid" type="text" class="form-control" id="mother_Nid" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Mother Blood Group</label>
+                                    <select name="MotherBloodGroup" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>Mother Occupation</label>
+                                    <select name="MotherOccupation" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select Occupation</option>
+                                        <option value="House Wife">House Wife</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Driver">Driver</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="MotherPhoto">Mother Photo</label>
+                                    <input name="MotherPhoto" type="file" class="form-control" id="Mother_Photo" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <label>If Guardian Is: </label>	&nbsp;	&nbsp;	&nbsp;	&nbsp;
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="radio1">
+                                    <label class="form-check-label">Father</label> &nbsp;	&nbsp;	&nbsp; &nbsp;	&nbsp;	&nbsp;
+                                    <input class="form-check-input" type="radio" name="radio1" checked="">
+                                    <label class="form-check-label">Mother</label> &nbsp;	&nbsp;	&nbsp; &nbsp;	&nbsp;	&nbsp;
+                                    <input class="form-check-input" type="radio" name="radio1" checked="">
+                                    <label class="form-check-label">Others</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="GuardianName">Guardian Name</label>
+                                    <input name="GuardianName" type="text" class="form-control" id="guardianName">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="GuardianRelation">Guardian Relation</label>
+                                    <input name="GuardianRelation" type="text" class="form-control" id="guardianRelation">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="GuardianEmail">Guardian Email</label>
+                                    <input name="GuardianEmail" type="email" class="form-control" id="guardianEmail">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="GuardianPhoto">Guardian Photo</label>
+                                    <input name="GuardianPhoto" type="file" class="form-control" id="Guardian_Photo" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="GuardianPhone">Guardian Phone</label>
+                                    <input name="GuardianPhone" type="number" class="form-control" id="guardianPhone">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Guardian Occupation</label>
+                                    <select name="GuardianOccupation" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        <option>HouseWife</option>
+                                        <option>Teacher</option>
+                                        <option>Doctor</option>
+                                        <option>Driver</option>
+                                        <option>Businessman</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="GuardianAddress">Guardian Address</label>
+                                    <input name="GuardianAddress" type="text" class="form-control" id="guardianAddress">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Save Record</button>
+                            <a href="StudentList" class="ml-3 btn btn-outline-info">Back To List</a>
+                        </div>
+
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+   
+</div>
+</form>
