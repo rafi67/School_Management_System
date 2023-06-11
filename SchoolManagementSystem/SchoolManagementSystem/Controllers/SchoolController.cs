@@ -156,6 +156,19 @@ namespace SchoolManagementSystem.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult TeacherAttendance()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult TeacherAttendanceList()
+        {
+            return View();
+        }
+
         #endregion
 
         #region Staff
@@ -532,9 +545,34 @@ namespace SchoolManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("Branch");
         }
+
+        [HttpGet]
+        public IActionResult BranchInput()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult BranchList()
+        {
+            return View();
+        }
         #endregion
 
         #region Building
+
+        [HttpGet]
+        public IActionResult BuidingInput()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult BuidingList()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Buiding()
         {
@@ -549,7 +587,35 @@ namespace SchoolManagementSystem.Controllers
         }
         #endregion
 
+        #region Room
+
+        [HttpGet]
+        public IActionResult Room()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult RoomList()
+        {
+            return View();
+        }
+        #endregion
+
         #region Shift
+
+        [HttpGet]
+        public IActionResult ShiftInput()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ShiftList()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Shift()
         {
@@ -570,6 +636,19 @@ namespace SchoolManagementSystem.Controllers
         #endregion
 
         #region Campus
+
+        [HttpGet]
+        public IActionResult CampusInput()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CampusList()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Campus() // Campus View
         {
@@ -729,6 +808,19 @@ namespace SchoolManagementSystem.Controllers
         #endregion
 
         #region Curriculum
+
+        [HttpGet]
+        public IActionResult CurriculumInput()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CurriculumList()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Curriculum()
         {

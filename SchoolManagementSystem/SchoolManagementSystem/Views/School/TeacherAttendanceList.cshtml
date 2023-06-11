@@ -1,16 +1,15 @@
 ﻿
 @{
-    ViewData["Title"] = "Session";
+    ViewData["Title"] = "TeacherAttendanceList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<button class="btn btn-success mt-3 mb-3"><a aps-controller="School" asp-action="SessionProgrameSettings" class="nav-link active">New Session</a></button>
+<button class="btn btn-success mt-5 mb-3"><a asp-controller="School" asp-action="TeacherAttendance" class="nav-link">Submit Attendance</a></button>
 <div class="row mb-4" style="width:100%">
     <div class="col-md-12">
         <div style="border-top-width:10px;" class="card card-default border-top-10 border-info">
             <div class="card-header">
-                <h2 class="card-title">All Session</h2>
+                <h2 class="card-title">All Teacher Attendance Records</h2>
             </div>
             <form>
                 <div class="card-body">
@@ -37,41 +36,54 @@
                                         <table id="example2" class="table table-striped table-hover dataTable dtr-inline" aria-describedby="example2_info">
                                             <thead>
                                                 <tr>
-                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Session : activate to sort column descending">Session</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Start Date : activate to sort column ascending">Start Date</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="End Date : activate to sort column ascending">End Date</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="User : activate to sort column ascending">User</th>
+                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Teacher ID : activate to sort column descending">Teacher ID</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Teacher Name: activate to sort column ascending">Teacher Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Attendance Date : activate to sort column ascending">Attendance Date</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Attendance Time : activate to sort column ascending">Attendance Time</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Present/Absent : activate to sort column ascending">Present/Absent</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Action : activate to sort column ascending">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2018-2019</td>
-                                                    <td>21/01/2018</td>
-                                                    <td>21/01/2019</td>
-                                                    <td>Israt</td>
-                                                    <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-info">Details</a><a href="#" class="btn btn-danger">Delete</a></td>
+                                                    <td class="dtr-control sorting_1" tabindex="0">122502</td>
+                                                    <td>Junaid Khan</td>
+                                                    <td>16/02/2020</td>
+                                                    <td>Present</td>
+                                                    <td>08:10:00</td>
+                                                    <td><a href="#" class="btn btn-primary">Details</a></td>
                                                 </tr>
                                                 <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2018-2019</td>
-                                                    <td>21/01/2018</td>
-                                                    <td>21/01/2019</td>
-                                                    <td>Israt</td>
-                                                    <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-info">Details</a><a href="#" class="btn btn-danger">Delete</a></td>
+                                                    <td class="dtr-control sorting_1" tabindex="0">122502</td>
+                                                    <td>Umme Khan</td>
+                                                    <td>16/02/2020</td>
+                                                    <td>08:10:00</td>
+                                                    <td>Present</td>
+                                                    <td><a href="#" class="btn btn-primary">Details</a></td>
                                                 </tr>
                                                 <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2018-2019</td>
-                                                    <td>21/01/2018</td>
-                                                    <td>21/01/2019</td>
-                                                    <td>Israt</td>
-                                                    <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-info">Details</a><a href="#" class="btn btn-danger">Delete</a></td>
+                                                    <td class="dtr-control sorting_1" tabindex="0">122502</td>
+                                                    <td>Junaid Khan</td>
+                                                    <td>16/02/2020</td>
+                                                    <td>08:10:00</td>
+                                                    <td>Absent</td>
+                                                    <td><a href="#" class="btn btn-primary">Details</a></td>
                                                 </tr>
                                                 <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2018-2019</td>
-                                                    <td>21/01/2018</td>
-                                                    <td>21/01/2019</td>
-                                                    <td>Israt</td>
-                                                    <td><a href="#" class="btn btn-primary">Edit</a><a href="#" class="btn btn-info">Details</a><a href="#" class="btn btn-danger">Delete</a></td>
+                                                    <td class="dtr-control sorting_1" tabindex="0">122502</td>
+                                                    <td>Junaid Khan</td>
+                                                    <td>16/02/2020</td>
+                                                    <td>08:10:00</td>
+                                                    <td>Present</td>
+                                                    <td><a href="#" class="btn btn-primary">Details</a></td>
+                                                </tr>
+                                                <tr class="odd">
+                                                    <td class="dtr-control sorting_1" tabindex="0">122502</td>
+                                                    <td>Junaid Khan</td>
+                                                    <td>16/02/2020</td>
+                                                    <td>08:10:00</td>
+                                                    <td>Present</td>
+                                                    <td><a href="#" class="btn btn-primary">Details</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

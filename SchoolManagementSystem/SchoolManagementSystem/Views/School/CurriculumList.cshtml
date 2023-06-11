@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "CurriculumList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr style="width:100%" class="bg-success col-lg-12" />
+<div class="wrapper" style="width:100%">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="CurriculumList" class="nav-link branch"><h3>Curriculum List</h3></a>
+                </li>
+                <li class="nav-item">
+                    <a href="CurriculumInput"><h3 class="nav-link branch" data-toggle="modal" data-target="#curriculumInsert">Curriculum</h3></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="row mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div style="border-top-width:10px;" class="card card-default border-top-10 border-info">
+            <div class="card-header">
+                <h2 class="card-title">Curriculum List</h2>
+            </div>
+
+            <div class="card-body">
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                <thead>
+                                    <tr>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="Curriculum Name :activattosort column descending">Curriculum Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" arialabel="Action :activatetosortcolumnascending">Action
+                                        <th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">X</td>
+                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a><a href="" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">X</td>
+                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a><a href="" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">X</td>
+                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a><a href="" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

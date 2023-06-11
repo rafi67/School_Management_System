@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "TeacherAttendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mt-5 mb-4" style="width:100%">
+    <div class="col-md-12">
+        <div class="card card-gray">
+            <div class="card-header">
+                <h2 class="card-title">Teacher Attendance</h2>
+            </div>
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Select Teacher</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" dataselect2id="1tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" data-select2-id="3">Select</option>
+                                    <option>Umme</option>
+                                    <option>Reba</option>
+                                    <option>Mili</option>
+                                    <option>Soshi</option>
+                                    <option>Jannat</option>
+                                    <option>Fatima</option>
+                                    <option>Hamza</option>
+                                    <option>Adnan fayaz</option>
+                                    <option>Samima</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Attend Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="date" class="form-control" data-inputmask-alias="datetime"datainputmaskinputformat="ddmm/yyyy" data-mask="" inputmode="numeric">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Attend Time</label>
+                                <div class="input-group">
+                                    <input type="time" class="form-control" data-inputmask-alias="time" data-mask="" inputmode="numeric">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                           <div class="form-check">
+
+                                <label class="form-check-label">Present</label>&nbsp;	&nbsp;	&nbsp; &nbsp;	&nbsp;	&nbsp;
+                                <input class="form-check-input" type="checkbox" name="radio1">&nbsp;	&nbsp;	&nbsp; &nbsp;	&nbsp;	&nbsp;
+                               <label class="form-check-label">Absent</label> &nbsp;	&nbsp;	&nbsp; &nbsp;	&nbsp;	&nbsp;
+                               <input class="form-check-input" type="checkbox" name="radio1">
+
+                           </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ml-3">
+                            <button class="btn btn-success">Save Record</button>
+                            <a href="TeacherAttendanceList" class=" ml-4 btn btn-outline-warning">Back</a>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

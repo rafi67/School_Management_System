@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "CurriculumInput";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr style="width:100%" class="bg-success col-lg-12" />
+<div class="wrapper" style="width:100%">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="CurriculumList" class="nav-link branch"><h3>Curriculum List</h3></a>
+                </li>
+                <li class="nav-item">
+                    <h3 href="CurriculumInput" class="nav-link branch " data-toggle="modal" data-target="#curriculumInsert">Curriculum</h3>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="container">
+    <div class="modal fade" id="curriculumInsert">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Curriculum</h1>
+                    <button class="close btn btn-outline-info m-1" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="row p-3">
+                                <label for="Curriculum Name">Curriculum Name</label>
+                                <input type="text" class="form-control" id="curriculum_Name">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

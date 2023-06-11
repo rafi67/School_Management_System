@@ -32,13 +32,13 @@
     <link rel="stylesheet" href="~/Content/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
 
             <!-- Preloader -->
-            <!--<div class="preloader flex-column justify-content-center align-items-center">
-                <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-            </div>-->
+            <div class="preloader flex-column justify-content-center align-items-center">
+            <img src="/Images/preeloader.gif" alt="Weight a Few Second" height="60%" width="60%" />
+        </div>
             <!-- Navbar -->
             <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
                 <!-- Left navbar links -->
@@ -89,25 +89,22 @@
                 </ul>
             </nav>
             <!-- /.navbar -->
+
+
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                <!-- Brand Logo -->
-                @*<a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
-                </a>*@
 
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    @*<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="/Images/bg4.png" class="img-circle elevation-2" alt="User Image" />
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">Admin</a>
+                        </div>
                     </div>
-                    <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>
-                    </div>*@
 
                     <!-- SidebarSearch Form -->
                     <div class="form-inline">
@@ -189,6 +186,56 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-wrench"></i>
+                                <p>
+                                    Configuration
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="BranchInput" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Branch</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="CampusInput" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Campus</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="BuidingInput" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Building</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="Room" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Room</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="ShiftInput" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Shift</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="CurriculumInput" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Curriculum</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
@@ -279,7 +326,7 @@
                             
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="fa fa-wrench"></i>
+                                <i class="fa fa-graduation-cap"></i>
                                     <p>
                                         Academics
                                         <i class="fas fa-angle-left right"></i>
@@ -357,7 +404,7 @@
                             </li>
                             <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fa fa-wrench"></i>
+                                <i class="fa fa-arrows-alt"></i>
                                 <p>
                                     Class Routine
                                     <i class="fas fa-angle-left right"></i>
@@ -393,7 +440,7 @@
 
                             <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fa fa-wrench"></i>
+                                <i class="fa fa-map"></i>
                                 <p>
                                     Examinations
                                     <i class="fas fa-angle-left right"></i>
@@ -438,7 +485,7 @@
 
                             <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fa fa-wrench"></i>
+                                <i class="fa fa-bookmark"></i>
                                 <p>
                                     Marks Sheet
                                     <i class="fas fa-angle-left right"></i>
@@ -476,26 +523,31 @@
                             
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-copy"></i>
+                                <i class="fa fa-calendar-check"></i>
                                     <p>
                                         Attendance
                                         <i class="fas fa-angle-left right"></i>
-                                        <span class="badge badge-info right">6</span>
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="pages/layout/top-nav.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                        <a aps-controller="School" asp-action="StudentAttendance" class="nav-link active">
+                                            <i class="fa fa-angle-double-right"></i>
                                             <p>Student Attendance</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                        <a aps-controller="School" asp-action="TeacherAttendance" class="nav-link active">
+                                            <i class="fa fa-angle-double-right"></i>
                                             <p>Teacher Attendance</p>
                                         </a>
                                     </li>
+                                <li class="nav-item">
+                                    <a aps-controller="School" asp-action="TeacherAttendanceList" class="nav-link active">
+                                        <i class="fa fa-angle-double-right"></i>
+                                        <p>Teacher Attendance List</p>
+                                    </a>
+                                </li>
                                     <li class="nav-item">
                                         <a href="pages/layout/boxed.html" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
@@ -511,26 +563,26 @@
             </aside>
         </div>
 
+
+    <!--  Add core use responsive -->
         <!-- Content Wrapper. Contains page content -->
-       @* <div class="content-wrapper">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">
-                                Student Information
-                            </h1>
-                        </div><!-- /.col -->
+                        <div class="col-sm-6"></div>
+@*
+                        <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard v1</li>
                             </ol>
-                        </div><!-- /.col -->
+                        </div>*@<!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
-            </div>*@
+            </div>
             <!-- /.content-header -->
             <!-- Main content -->
     
