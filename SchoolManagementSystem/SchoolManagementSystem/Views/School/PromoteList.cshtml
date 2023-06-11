@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SchoolManagementSystem.ViewModel.VmPromotionList>;
 @{
     ViewData["Title"] = "PromoteList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <div class="card-header">
                 <h2 class="card-title">All Students</h2>
             </div>
-            <form>
+            <form asp-action="PromoteListPdf" method="post">
                 <div class="card-body">
                     <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
@@ -22,7 +22,7 @@
                                             <div class="dt-buttons btn-group flex-wrap">
                                                 <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Copy</span></button>
                                                 <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button>
-                                                <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button> <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Print</span></button>
+                                                <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button> <button type="submit" class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1"><span>PDF</span></button> <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Print</span></button>
                                                 <div class="btn-group"><button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example1" type="button" aria-haspopup="true"><span>Column visibility</span><span class="dt-down-arrow"></span></button></div>
                                             </div>
                                         </div>
@@ -36,133 +36,41 @@
                                         <table id="example2" class="table table-striped table-hover dataTable dtr-inline" aria-describedby="example2_info">
                                             <thead>
                                                 <tr>
-                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Promote ID : activate to sort column descending">Promote ID</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Student Name: activate to sort column ascending">Student Name</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Promote Date: activate to sort column ascending">Promote Date</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Promotion Fee: activate to sort column ascending">Promotion Fee</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Promotion Status: activate to sort column ascending">Promotion Status</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Fee Status : activate to sort column ascending">Fee Status</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Promote Class : activate to sort column ascending">Promote Class</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Class Section : activate to sort column ascending">Class Section</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Action : activate to sort column ascending">Class Action</th>
+                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Promote ID : activate to sort column descending">
+                                                        Roll Number</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Student Name: activate to sort column ascending">
+                                                        Student Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Promote Class : activate to sort column ascending">
+                                                        Promote Class</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Class Section : activate to sort column ascending">
+                                                        Group
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Class Section : activate to sort column ascending">
+                                                        Shift
+                                                    </th>
+                                                    
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Action : activate to sort column ascending">
+                                                        Class Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">1</td>
-                                                    <td>Fatima Rahman</td>
-                                                    <td>20/10/2018</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>Play Group</td>
-                                                    <td>A</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2</td>
-                                                    <td>Raihan</td>
-                                                    <td>20/10/2018</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>2nd</td>
-                                                    <td>A</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">3</td>
-                                                    <td>Tamanna</td>
-                                                    <td>24/10/2018</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>2nd</td>
-                                                    <td>A</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2</td>
-                                                    <td>Rahman</td>
-                                                    <td>20/10/2018</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>2nd</td>
-                                                    <td>A</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="dtr-control sorting_1" tabindex="0">2</td>
-                                                    <td>Soshi</td>
-                                                    <td>20/10/2018</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control select2 select2-hidden-accessible col-7" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option>Not Set</option>
-                                                            <option>True</option>
-                                                            <option>False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>2nd</td>
-                                                    <td>A</td>
-                                                    <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
-                                                </tr>
+                                                @foreach(var list in Model)
+                                                {
+                                                    <tr class="odd">
+                                                        <td class="dtr-control sorting_1" tabindex="0"><input name="RollNumber" value="@list.RollNumber" style="width:50px;"/></td>
+                                                        <td><input name="StudentName" value="@list.StudentName" style="width:150px; background-color:transparent; border:none;"/></td>
+                                                        <td>
+                                                            <input name="ClassName" value="@list.ClassName" style="width:30px"/>
+                                                        </td>
+                                                        <td>
+                                                            <input name="GroupName" value="@list.GroupName" />
+                                                        </td>
+                                                        <td>
+                                                            <input name="ShiftName" value="@list.ShiftName" />
+                                                        </td>
+                                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
+                                                    </tr>
+                                                }
                                             </tbody>
                                         </table>
                                     </div>

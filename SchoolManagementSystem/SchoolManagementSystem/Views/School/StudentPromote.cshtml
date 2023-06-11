@@ -7,6 +7,7 @@
     var Session = ViewData["Session"] as List<SchoolManagementSystem.Models.Session>;
     var Group = ViewData["Group"] as List<SchoolManagementSystem.Models.Group>;
     var Class = ViewData["Class"] as List<SchoolManagementSystem.Models.Class>;
+    var Shift = ViewData["Shift"] as List<SchoolManagementSystem.Models.Shift>;
 }
 
 
@@ -86,15 +87,18 @@
                                         }
                                     </select>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <label>Promote Date</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                        </div>
-                                        <input name="PromotionDate" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
-                                    </div>
+                                    <label>Select Student Shift</label>
+                                    <select name="ShiftId" class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" data-select2-id="3">Select</option>
+                                        @foreach (var list in Shift)
+                                        {
+                                            <option value="@list.ShiftId">@list.ShiftName-@list.ShiftType</option>
+                                        }
+                                    </select>
                                 </div>
+                                
                                 @*<div class="col-md-4">
                                     <label for="PromotionFee">Promotion Fee</label>
                                     <input type="number" class="form-control" id="promotion_Fee">
@@ -105,11 +109,20 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-4">
+                                    <label>Promote Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input name="PromotionDate" type="date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <label>Promotion Status</label>
                                     <select name="PromotionStatus" class="form-control select2 select2-hidden-accessible col-md-3" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         <option>Not Set</option>
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
+                                        <option value="true">True</option>
+                                        <option value="false">False</option>
                                     </select>
                                 </div>
                                 @*<div class="col-md-4">

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSystem.Models;
 using SchoolManagementSystem.ViewCategory;
 using SchoolManagementSystem.ViewModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
-using System.Text.Json;
+using System.IO;
 
 namespace SchoolManagementSystem.Controllers
 {
@@ -18,6 +18,76 @@ namespace SchoolManagementSystem.Controllers
         {
             this.env = env;
         }
+
+        #region pdf
+        [HttpPost]
+        public IActionResult PromoteListPdf(VmPromotionList.PromoteData p)
+        {
+            // Sample table data
+            
+
+            // Create a new PDF document
+            var document = new Document();
+
+            // Set the response content type to PDF
+            Response.ContentType = "application/pdf";
+
+            // Set the response headers for downloading the PDF file
+            Response.Headers.Add("Content-Disposition", "attachment; filename=table.pdf");
+
+            // Create a new PDF writer using the response stream
+            var writer = PdfWriter.GetInstance(document, Response.Body);
+
+            // Open the document
+            document.Open();
+
+            // Create a PDF table
+            var table = new PdfPTable(10); // Specify the number of columns
+
+            // Set table width to 100% of the page width
+            table.WidthPercentage = 100;
+
+            // Add table headers
+            table.AddCell("Student Name");
+            table.AddCell("Roll Number");
+            table.AddCell("Class");
+            table.AddCell("Promotion Date");
+            table.AddCell("Promotion Status");
+            table.AddCell("Section Name");
+            table.AddCell("Shift Name");
+            table.AddCell("Shift Type");
+            table.AddCell("Session");
+            table.AddCell("Group");
+
+            // Add table data
+            for(int i=0; i<p.RollNumber.Length; i++)
+            {
+                table.AddCell(p.StudentName[i]);
+                table.AddCell(p.RollNumber[i]);
+                table.AddCell(p.ClassName[i]);
+                table.AddCell(p.PromotionDate[i]);
+                table.AddCell(p.PromotionStatus[i]);
+                table.AddCell(p.SectionName[i]);
+                table.AddCell(p.ShiftName[i]);
+                table.AddCell(p.ShiftType[i]);
+                table.AddCell(p.SessionName[i]);
+                table.AddCell(p.GroupName[i]);
+            }
+
+            // Add the table to the document
+            document.Add(table);
+            MemoryStream stream = new MemoryStream();
+            
+
+            // Flush the response stream
+            Response.Body.Flush();
+
+            // Close the document
+            document.Close();
+
+            return new EmptyResult();
+        }
+        #endregion
 
         #region Image
 
@@ -216,6 +286,7 @@ namespace SchoolManagementSystem.Controllers
             ViewData["Section"] = db.Sections.ToList();
             ViewData["Class"] = db.Classes.ToList();
             ViewData["Student"] = db.Students.ToList();
+            ViewData["Shift"] = db.Shifts.ToList();
             return View();
         }
 
@@ -227,6 +298,7 @@ namespace SchoolManagementSystem.Controllers
             student.Section = sp.Section;
             student.SessionId = sp.SessionId;
             student.GroupId = sp.GroupId;
+            student.ShiftId = sp.ShiftId;
             db.Entry(student).State = EntityState.Modified;
             db.Entry(sp).State = EntityState.Added;
             db.SaveChanges();
@@ -236,7 +308,41 @@ namespace SchoolManagementSystem.Controllers
         [HttpGet]
         public IActionResult PromoteList()
         {
-            return View();
+            var sPromote = db.StudentPromotions.ToList();
+            var data = new VmPromotionList();
+            var list = new List<VmPromotionList>();
+            foreach (var s in sPromote)
+            {
+                data.RollNumber = db.Students
+                    .Where(rn => rn.StudentId == s.StudentId)
+                    .Select(rn => rn.RollNumber).FirstOrDefault();
+                data.StudentName = db.Students
+                    .Where(x => x.StudentId == s.StudentId)
+                    .Select(x => x.FirstName + ' ' + x.LastName).FirstOrDefault();
+                data.ClassName = db.Classes
+                    .Where(c => c.ClassId == s.ClassId)
+                    .Select(c => c.ClassName).FirstOrDefault();
+                data.SectionName = db.Sections
+                    .Where(se => se.SectionId == s.SectionId)
+                    .Select(se => se.SectionName).FirstOrDefault();
+                data.ShiftName = db.Shifts
+                    .Where(sh => sh.ShiftId == s.ShiftId)
+                    .Select(sh => sh.ShiftName).FirstOrDefault();
+                data.ShiftType = db.Shifts
+                    .Where(sh => sh.ShiftId == s.ShiftId)
+                    .Select(sh => sh.ShiftType).FirstOrDefault();
+                data.SessionName = db.Sessions
+                    .Where(sn => sn.SessionId == sn.SessionId)
+                    .Select(sn => sn.SessionName).FirstOrDefault();
+                data.GroupName = db.Groups
+                    .Where(g => g.GroupId == s.GroupId)
+                    .Select(g => g.GroupName).FirstOrDefault();
+                data.PromotionDate = Convert.ToDateTime(s.PromotionDate)
+                    .ToString("yyyy-MM-dd");
+                data.PromotionStatus = s.PromotionStatus == true ? "true" : "false";
+                list.Add(data);
+            }
+            return View(list);
         }
         #endregion
 

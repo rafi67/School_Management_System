@@ -652,6 +652,11 @@ namespace SchoolManagementSystem.Models
                     .HasForeignKey(d => d.SessionId)
                     .HasConstraintName("FK__StudentPr__Sessi__3864608B");
 
+                entity.HasOne(d => d.Shift)
+                    .WithMany(p => p.StudentPromotions)
+                    .HasForeignKey(d => d.ShiftId)
+                    .HasConstraintName("FK__StudentPr__Shift__3A4CA8FD");
+
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.StudentPromotions)
                     .HasForeignKey(d => d.StudentId)

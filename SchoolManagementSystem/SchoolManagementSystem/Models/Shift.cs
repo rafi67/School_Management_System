@@ -9,6 +9,7 @@ namespace SchoolManagementSystem.Models
         {
             CampusShifts = new HashSet<CampusShift>();
             ClassRoutines = new HashSet<ClassRoutine>();
+            StudentPromotions = new HashSet<StudentPromotion>();
             Students = new HashSet<Student>();
         }
 
@@ -20,6 +21,7 @@ namespace SchoolManagementSystem.Models
 
         public virtual ICollection<CampusShift> CampusShifts { get; set; }
         public virtual ICollection<ClassRoutine> ClassRoutines { get; set; }
+        public virtual ICollection<StudentPromotion> StudentPromotions { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }
