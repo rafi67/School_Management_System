@@ -33,26 +33,26 @@
                     <button class="close btn btn-outline-info m-1" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form asp-action="BranchInput" method="post">
                         <div class="form-group">
                             <div class="row p-3">
                                 <label for="Branch Name">Branch Name</label>
-                                <input type="text" class="form-control" id="branch_Name">
+                                <input name="BranchName" type="text" class="form-control" id="branch_Name">
                             </div>
-                            <div class="row p-3">
+                            @*<div class="row p-3">
                                 <label for="School Name">School Name</label>
                                 <input type="text" class="form-control" id="school_Name">
-                            </div>
+                            </div>*@
                             <div class="row p-3">
                                 <label for="Branch Location">Branch Location</label>
-                                <input type="text" class="form-control" id="branch_location">
+                                <input name="BranchLocation" type="text" class="form-control" id="branch_location">
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info">Send</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info">Send</button>
                 </div>
             </div>
         </div>

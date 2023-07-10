@@ -552,10 +552,27 @@ namespace SchoolManagementSystem.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult BranchInput(Branch b)
+        {
+            db.Entry(b).State = EntityState.Added;
+            db.SaveChanges();
+            return RedirectToAction("BranchInput");
+        }
+
         [HttpGet]
         public IActionResult BranchList()
         {
-            return View();
+            return View(db.Branches.ToList());
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteBranch(long id)
+        {
+            var b = db.Branches.Find(id);
+            db.Branches.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("BranchList");
         }
         #endregion
 

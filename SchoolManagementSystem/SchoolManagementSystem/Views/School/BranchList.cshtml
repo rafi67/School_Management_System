@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<SchoolManagementSystem.Models.Branch>;
 @{
     ViewData["Title"] = "BranchList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -40,25 +40,21 @@
                                 <thead>
                                     <tr>
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="Branch Name :activattosort column descending">Branch Name</th>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="School Name :activattosort column descending">School Name</th>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="Branch Location :activattosort column descending">Branch Location</th>
+@*                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="School Name :activattosort column descending">School Name</th>
+*@                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" ariasort="ascending" arialabel="Branch Location :activattosort column descending">Branch Location</th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" arialabel="Action :activatetosortcolumnascending">Action
                                         <th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">X</td>
-                                        <td>xyz</td>
-                                        <td>ABC</td>
-                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a><a href="" class="btn btn-danger">Delete</a></td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">X</td>
-                                        <td>xyz</td>
-                                        <td>ABC</td>
-                                        <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a><a href="" class="btn btn-danger">Delete</a></td>
-                                    </tr>
+                                    @foreach(var list in Model)
+                                    {
+                                        <tr class="odd">
+                                            <td class="dtr-control sorting_1" tabindex="0">@list.BranchName</td>
+                                            <td>@list.BranchLocation</td>
+                                            <td><a href="" class="btn btn-primary">Edit</a><a class="btn btn-primary" href="" class="btn btn-info">Details</a><a href="@Url.Action("DeleteBranch", "School", new { id = list.BranchId })" class="btn btn-danger">Delete</a></td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

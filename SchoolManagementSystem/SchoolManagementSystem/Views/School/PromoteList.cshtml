@@ -57,16 +57,16 @@
                                                 @foreach(var list in Model)
                                                 {
                                                     <tr class="odd">
-                                                        <td class="dtr-control sorting_1" tabindex="0"><input name="RollNumber" value="@list.RollNumber" style="width:50px;"/></td>
+                                                        <td class="dtr-control sorting_1" tabindex="0"><input name="RollNumber" value="@list.RollNumber" style="width:50px;background-color:transparent; border:none;" /></td>
                                                         <td><input name="StudentName" value="@list.StudentName" style="width:150px; background-color:transparent; border:none;"/></td>
                                                         <td>
-                                                            <input name="ClassName" value="@list.ClassName" style="width:30px"/>
+                                                            <input name="ClassName" value="@list.ClassName" style="width:30px; background-color:transparent; border:none;" />
                                                         </td>
                                                         <td>
-                                                            <input name="GroupName" value="@list.GroupName" />
+                                                            <input name="GroupName" value="@list.GroupName" style="width:100px;background-color:transparent; border:none;" />
                                                         </td>
                                                         <td>
-                                                            <input name="ShiftName" value="@list.ShiftName" />
+                                                            <input name="ShiftName" value="@list.ShiftName" style="width:100px;background-color:transparent; border:none;" />
                                                         </td>
                                                         <td><a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-info">Details</a></td>
                                                     </tr>
